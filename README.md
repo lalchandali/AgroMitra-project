@@ -3,9 +3,7 @@
 <p align="center">
 <<<<<<< HEAD
   <img src="AgroMitra\frontend\src\assets\icone.png" alt="AgroMitra Logo" width="140">
-=======
-  <img src="frontend/src/assets/icone.png" alt="AgroMitra Logo" width="140">
->>>>>>> d4bd2af93a1180b7d8a685954390914e27ed1ae2
+
 </p>
 
 <p align="center">
