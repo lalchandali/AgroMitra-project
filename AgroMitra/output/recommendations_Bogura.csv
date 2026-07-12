@@ -1,0 +1,6 @@
+crop,name_bn,category,final_score,scores,est_revenue_bdt,est_cost_bdt,est_profit_bdt,profit_margin_pct,grow_days,avg_yield_kg,difficulty,market_demand,risk_level,water_need,export_potential,organic_possible
+Rice,ধান,Grain,98.0,"{'season': 100, 'soil': 100, 'district': 100, 'profitability': 100, 'budget': 80, 'experience': 100}",618750,75000,543750,87.9,120,11250,Easy,Very High,Low,High,False,True
+Ginger,আদা,Spice,80.5,"{'season': 100, 'soil': 100, 'district': 50, 'profitability': 100, 'budget': 20, 'experience': 60}",1800000,150000,1650000,91.7,240,20000,Hard,High,High,Medium,True,True
+Cabbage,বাঁধাকপি,Vegetable,80.0,"{'season': 20, 'soil': 100, 'district': 100, 'profitability': 100, 'budget': 100, 'experience': 100}",1250000,62500,1187500,95.0,70,62500,Easy,High,Low,Medium,False,True
+Brinjal,বেগুন,Vegetable,78.0,"{'season': 20, 'soil': 100, 'district': 100, 'profitability': 100, 'budget': 80, 'experience': 100}",900000,70000,830000,92.2,60,30000,Easy,High,Low,Medium,False,True
+Cauliflower,ফুলকপি,Vegetable,78.0,"{'season': 20, 'soil': 100, 'district': 100, 'profitability': 100, 'budget': 80, 'experience': 100}",1050000,70000,980000,93.3,65,37500,Medium,High,Low,Medium,False,True

@@ -1,0 +1,965 @@
+{
+  "Bogura": {
+    "soil_type": "Loam",
+    "avg_temp": 26,
+    "avg_rainfall": 1500,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Vegetables",
+      "Potato"
+    ]
+  },
+  "Rajshahi": {
+    "soil_type": "Sandy Loam Barind Soil (বরেন্দ্র মাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1400,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Mango",
+      "Wheat",
+      "Rice",
+      "Maize",
+      "Lentil"
+    ]
+  },
+  "Cumilla": {
+    "soil_type": "Clay Loam",
+    "avg_temp": 26,
+    "avg_rainfall": 1800,
+    "market_access": "Good",
+    "irrigation": "Limited",
+    "speciality": [
+      "Mixed Vegetables"
+    ]
+  },
+  "Dhaka": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1800,
+    "market_access": "Excellent",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Jute",
+      "Wheat",
+      "Mustard",
+      "Vegetables"
+    ]
+  },
+  "Chattogram": {
+    "soil_type": "Clay Loam Hill Soil (টিলা মাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 2800,
+    "market_access": "Excellent",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Maize",
+      "Banana",
+      "Jackfruit",
+      "Groundnut"
+    ]
+  },
+  "Khulna": {
+    "soil_type": "Sandy Loam Saline Soil (খারাপ মাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1600,
+    "market_access": "Good",
+    "irrigation": "Limited",
+    "speciality": [
+      "Shrimp",
+      "Prawn",
+      "Rice",
+      "Vegetables",
+      "Salt Tolerant Rice",
+      "Watermelon",
+      "Sunflower",
+      "Coconut"
+    ]
+  },
+  "Barishal": {
+    "soil_type": "Clay Loam Peat Soil (পিট মাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 2200,
+    "market_access": "Good",
+    "irrigation": "Limited",
+    "speciality": [
+      "Rice",
+      "Jute",
+      "Vegetables",
+      "Watermelon",
+      "Sunflower",
+      "Betel Nut",
+      "Coconut",
+      "Chili"
+    ]
+  },
+  "Sylhet": {
+    "soil_type": "Loam Red Brown Terrace Soil (লাল বাদামী মাটি)",
+    "avg_temp": 25,
+    "avg_rainfall": 3500,
+    "market_access": "Limited",
+    "irrigation": "Limited",
+    "speciality": [
+      "Tea",
+      "Pineapple",
+      "Jackfruit",
+      "Banana",
+      "Rice",
+      "Vegetables"
+    ]
+  },
+  "Rangpur": {
+    "soil_type": "Sandy Loam Teesta Alluvial Soil (তিস্তা ভাটির মাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1200,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Wheat",
+      "Maize",
+      "Sugarcane",
+      "Vegetables",
+      "Fruits",
+      "Pulses"
+    ]
+  },
+  "Mymensingh": {
+    "soil_type": "Clay Loam Red Brown Floodplain Soil (লাল বাদামী বন্যাদুর্গত মাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 2000,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Jute",
+      "Vegetables",
+      "Fruits",
+      "Pulses",
+      "Banana",
+      "Papaya"
+    ]
+  },
+  "Faridpur": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1700,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Jute",
+      "Vegetables",
+      "Fruits",
+      "Pulses",
+      "Banana",
+      "Papaya"
+    ]
+  },
+  "Pabna": {
+    "soil_type": "Sandy Loam Barind Soil (বরেন্দ্র মাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1300,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Wheat",
+      "Maize",
+      "Lentil",
+      "Vegetables"
+    ]
+  },
+  "Munshiganj": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1800,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Jute",
+      "Vegetables",
+      "Fruits",
+      "Pulses",
+      "Banana",
+      "Papaya",
+      "Potato"
+    ]
+  },
+  "Rangamati": {
+    "soil_type": "Clay Loam Hill Soil (টিলা মাটি)",
+    "avg_temp": 25,
+    "avg_rainfall": 4000,
+    "market_access": "Limited",
+    "irrigation": "Limited",
+    "speciality": [
+      "Rice",
+      "Jute",
+      "Vegetables",
+      "Fruits",
+      "Pulses",
+      "Banana",
+      "Papaya"
+    ]
+  },
+  "Khagrachari": {
+    "soil_type": "Clay Loam Hill Soil (টিলা মাটি)",
+    "avg_temp": 25,
+    "avg_rainfall": 4000,
+    "market_access": "Limited",
+    "irrigation": "Limited",
+    "speciality": [
+      "Rice",
+      "Jute",
+      "Vegetables",
+      "Fruits",
+      "Pulses",
+      "Banana",
+      "Papaya"
+    ]
+  },
+  "Bandarban": {
+    "soil_type": "Clay Loam Hill Soil (টিলা মাটি)",
+    "avg_temp": 25,
+    "avg_rainfall": 4000,
+    "market_access": "Limited",
+    "irrigation": "Limited",
+    "speciality": [
+      "Rice",
+      "Jute",
+      "Vegetables",
+      "Fruits",
+      "Pulses",
+      "Banana",
+      "Papaya",
+      "Coffee",
+      "Cashew Nut"
+    ]
+  },
+  "Naogaon": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1500,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Wheat",
+      "Maize",
+      "Lentil",
+      "Vegetables",
+      "Fruits",
+      "Pulses",
+      "Mango",
+      "Jackfruit",
+      "Banana",
+      "Papaya"
+    ]
+  },
+  "Natore": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1500,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Wheat",
+      "Maize",
+      "Lentil",
+      "Vegetables",
+      "Fruits",
+      "Pulses",
+      "Mango",
+      "Jackfruit",
+      "Banana",
+      "Papaya",
+      "Sugarcane"
+    ]
+  },
+  "Panchagarh": {
+    "soil_type": "Sandy Loam Teesta Alluvial Soil (তিস্তা ভাটির মাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1200,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Wheat",
+      "Maize",
+      "Lentil",
+      "Vegetables",
+      "Fruits",
+      "Pulses",
+      "Mango",
+      "Jackfruit",
+      "Banana",
+      "Papaya",
+      "Tea"
+    ]
+  },
+  "Dinajpur": {
+    "soil_type": "Sandy Loam Teesta Alluvial Soil (তিস্তা ভাটির মাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1200,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Wheat",
+      "Maize",
+      "Lentil",
+      "Vegetables",
+      "Fruits",
+      "Pulses",
+      "Mango",
+      "Jackfruit",
+      "Banana",
+      "Papaya",
+      "Litchi"
+    ]
+  },
+  "Thakurgaon": {
+    "soil_type": "Sandy Loam Teesta Alluvial Soil (তিস্তা ভাটির মাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1200,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Wheat",
+      "Maize",
+      "Lentil",
+      "Vegetables",
+      "Fruits",
+      "Pulses",
+      "Mango",
+      "Jackfruit",
+      "Banana",
+      "Papaya",
+      "Potato"
+    ]
+  },
+  "Joypurhat": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1500,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Wheat",
+      "Maize",
+      "Lentil",
+      "Vegetables",
+      "Fruits",
+      "Pulses",
+      "Mango",
+      "Jackfruit",
+      "Banana",
+      "Papaya",
+      "Potato"
+    ]
+  },
+  "Kushtia": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1500,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Wheat",
+      "Maize",
+      "Lentil",
+      "Vegetables",
+      "Fruits",
+      "Pulses",
+      "Mango",
+      "Jackfruit",
+      "Banana",
+      "Papaya",
+      "Tobacco"
+    ]
+  },
+  "Jamalpur": {
+    "soil_type": "Clay Loam Red Brown Floodplain Soil (লাল বাদামী বন্যাদুর্গত মাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 2000,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Jute",
+      "Vegetables",
+      "Fruits",
+      "Pulses",
+      "Banana",
+      "Papaya",
+      "Chili"
+    ]
+  },
+  "Bagerhat": {
+    "soil_type": "Sandy Loam Saline Soil (খারাপ মাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1700,
+    "market_access": "Good",
+    "irrigation": "Limited",
+    "speciality": [
+      "Shrimp",
+      "Prawn",
+      "Coconut",
+      "Betel Nut",
+      "Rice"
+    ]
+  },
+  "Satkhira": {
+    "soil_type": "Sandy Loam Saline Soil (খারাপ মাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1600,
+    "market_access": "Good",
+    "irrigation": "Limited",
+    "speciality": [
+      "Shrimp",
+      "Mango",
+      "Rice",
+      "Fish",
+      "Vegetables"
+    ]
+  },
+  "Jhalokathi": {
+    "soil_type": "Clay Loam Peat Soil (পিট মাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 2200,
+    "market_access": "Good",
+    "irrigation": "Limited",
+    "speciality": [
+      "Guava",
+      "Rice",
+      "Coconut",
+      "Betel Nut",
+      "Amra"
+    ]
+  },
+  "Pirojpur": {
+    "soil_type": "Clay Loam Peat Soil (পিট মাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 2300,
+    "market_access": "Good",
+    "irrigation": "Limited",
+    "speciality": [
+      "Guava",
+      "Coconut",
+      "Betel Nut",
+      "Rice",
+      "Amra"
+    ]
+  },
+  "Barguna": {
+    "soil_type": "Clay Loam Saline Soil (খারাপ মাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 2400,
+    "market_access": "Good",
+    "irrigation": "Limited",
+    "speciality": [
+      "Rice",
+      "Pulse",
+      "Watermelon",
+      "Fish",
+      "Coconut"
+    ]
+  },
+  "Patuakhali": {
+    "soil_type": "Clay Loam Saline Soil (খারাপ মাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 2400,
+    "market_access": "Good",
+    "irrigation": "Limited",
+    "speciality": [
+      "Rice",
+      "Watermelon",
+      "Pulse",
+      "Chili",
+      "Coconut"
+    ]
+  },
+  "Bhola": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 2300,
+    "market_access": "Good",
+    "irrigation": "Limited",
+    "speciality": [
+      "Rice",
+      "Chili",
+      "Pulse",
+      "Betel Nut",
+      "Buffalo Milk"
+    ]
+  },
+  "Brahmanbaria": {
+    "soil_type": "Clay Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1900,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Jute",
+      "Wheat",
+      "Mustard",
+      "Vegetables"
+    ]
+  },
+  "Chandpur": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1800,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Potato",
+      "Jute",
+      "Mustard",
+      "Fish"
+    ]
+  },
+  "Lakshmipur": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1900,
+    "market_access": "Good",
+    "irrigation": "Limited",
+    "speciality": [
+      "Betel Nut",
+      "Coconut",
+      "Rice",
+      "Chili",
+      "Soya bean"
+    ]
+  },
+  "Noakhali": {
+    "soil_type": "Clay Loam Saline Soil (খারাপ মাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 2500,
+    "market_access": "Good",
+    "irrigation": "Limited",
+    "speciality": [
+      "Rice",
+      "Coconut",
+      "Betel Nut",
+      "Soya bean",
+      "Watermelon"
+    ]
+  },
+  "Coxs Bazar": {
+    "soil_type": "Clay Loam Salt Soil (লোনা মাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 3200,
+    "market_access": "Good",
+    "irrigation": "Limited",
+    "speciality": [
+      "Salt",
+      "Dry Fish",
+      "Rice",
+      "Pan (Betel Leaf)",
+      "Coconut"
+    ]
+  },
+  "Feni": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 2200,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Vegetables",
+      "Mustard",
+      "Pulse",
+      "Fish"
+    ]
+  },
+  "Gazipur": {
+    "soil_type": "Clay Loam Madhupur Soil (লাল মাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1900,
+    "market_access": "Excellent",
+    "irrigation": "Available",
+    "speciality": [
+      "Jackfruit",
+      "Rice",
+      "Pineapple",
+      "Vegetables",
+      "Poultry"
+    ]
+  },
+  "Narayanganj": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1800,
+    "market_access": "Excellent",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Jute",
+      "Potato",
+      "Mustard",
+      "Vegetables"
+    ]
+  },
+  "Narsingdi": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1900,
+    "market_access": "Excellent",
+    "irrigation": "Available",
+    "speciality": [
+      "Banana",
+      "Vegetables",
+      "Lotus Cucumber (কাকরোল)",
+      "Rice",
+      "Jute"
+    ]
+  },
+  "Manikganj": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1750,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Mustard",
+      "Tobacco",
+      "Sugarcane",
+      "Potato",
+      "Vegetables"
+    ]
+  },
+  "Gopalganj": {
+    "soil_type": "Clay Loam Peat Soil (পিট মাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1800,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Jute",
+      "Sugarcane",
+      "Groundnut",
+      "Vegetables"
+    ]
+  },
+  "Madaripur": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1750,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Jute",
+      "Rice",
+      "Mustard",
+      "Pulse",
+      "Sugarcane"
+    ]
+  },
+  "Rajbari": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1650,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Jute",
+      "Onion",
+      "Rice",
+      "Sugarcane",
+      "Oilseeds"
+    ]
+  },
+  "Shariatpur": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1750,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Jute",
+      "Rice",
+      "Onion",
+      "Garlic",
+      "Chili"
+    ]
+  },
+  "Kishoreganj": {
+    "soil_type": "Loam Haor Soil (হাওর মাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 2100,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Potato",
+      "Mustard",
+      "Groundnut",
+      "Fish"
+    ]
+  },
+  "Netrokona": {
+    "soil_type": "Clay Loam Haor Soil (হাওর মাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 2200,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Jute",
+      "Mustard",
+      "Potato",
+      "Fish"
+    ]
+  },
+  "Sherpur": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1950,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Vegetables",
+      "Mustard",
+      "Wheat",
+      "Potato"
+    ]
+  },
+  "Tangail": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1850,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Pineapple",
+      "Rice",
+      "Mustard",
+      "Sugarcane",
+      "Banana"
+    ]
+  },
+  "Jashore": {
+    "soil_type": "Sandy Loam",
+    "avg_temp": 27,
+    "avg_rainfall": 1550,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Vegetables",
+      "Flower",
+      "Date Juice",
+      "Rice",
+      "Jute"
+    ]
+  },
+  "Jhenaidah": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1500,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Banana",
+      "Rice",
+      "Sugarcane",
+      "Vegetables",
+      "Betel Leaf"
+    ]
+  },
+  "Magura": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1550,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Garlic",
+      "Onion",
+      "Jute",
+      "Rice",
+      "Sugarcane"
+    ]
+  },
+  "Narail": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1600,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Jute",
+      "Pulse",
+      "Mustard",
+      "Coconut"
+    ]
+  },
+  "Chuadanga": {
+    "soil_type": "Sandy Loam",
+    "avg_temp": 27,
+    "avg_rainfall": 1400,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Sugarcane",
+      "Mango",
+      "Corn",
+      "Vegetables",
+      "Rice"
+    ]
+  },
+  "Meherpur": {
+    "soil_type": "Sandy Loam",
+    "avg_temp": 27,
+    "avg_rainfall": 1350,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Mango",
+      "Litchi",
+      "Onion",
+      "Garlic",
+      "Tobacco"
+    ]
+  },
+  "Sirajganj": {
+    "soil_type": "Loam Alluvial Soil (পলিমাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1550,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Milk",
+      "Rice",
+      "Mustard",
+      "Jute",
+      "Vegetables"
+    ]
+  },
+  "Chapai Nawabganj": {
+    "soil_type": "Sandy Loam Barind Soil (বরেন্দ্র মাটি)",
+    "avg_temp": 27,
+    "avg_rainfall": 1300,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Mango",
+      "Rice",
+      "Wheat",
+      "Sugarcane",
+      "Tomato"
+    ]
+  },
+  "Gaibandha": {
+    "soil_type": "Sandy Loam Teesta Alluvial Soil (তিস্তা ভাটির মাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1300,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Jute",
+      "Maize",
+      "Chili",
+      "Onion"
+    ]
+  },
+  "Kurigram": {
+    "soil_type": "Sandy Loam Sandy Soil (বেলে মাটি)",
+    "avg_temp": 25,
+    "avg_rainfall": 1400,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Rice",
+      "Jute",
+      "Maize",
+      "Groundnut",
+      "Potato"
+    ]
+  },
+  "Lalmonirhat": {
+    "soil_type": "Sandy Loam Teesta Alluvial Soil (তিস্তা ভাটির মাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1300,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Tobacco",
+      "Maize",
+      "Rice",
+      "Potato",
+      "Ginger"
+    ]
+  },
+  "Nilphamari": {
+    "soil_type": "Sandy Loam Teesta Alluvial Soil (তিস্তা ভাটির মাটি)",
+    "avg_temp": 26,
+    "avg_rainfall": 1250,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": [
+      "Ginger",
+      "Garlic",
+      "Potato",
+      "Rice",
+      "Tobacco"
+    ]
+  },
+  "Habiganj": {
+    "soil_type": "Loam Haor and Hill Soil (হাওর ও টিলা মাটি)",
+    "avg_temp": 25,
+    "avg_rainfall": 3200,
+    "market_access": "Limited",
+    "irrigation": "Limited",
+    "speciality": [
+      "Tea",
+      "Rice",
+      "Lemon",
+      "Pineapple",
+      "Fish"
+    ]
+  },
+  "Moulvibazar": {
+    "soil_type": "Loam Red Brown Terrace Soil (লাল বাদামী মাটি)",
+    "avg_temp": 25,
+    "avg_rainfall": 3400,
+    "market_access": "Limited",
+    "irrigation": "Limited",
+    "speciality": [
+      "Tea",
+      "Pineapple",
+      "Lemon",
+      "Rubber",
+      "Rice"
+    ]
+  },
+  "Sunamganj": {
+    "soil_type": "Clay Haor Soil (হাওর মাটি)",
+    "avg_temp": 25,
+    "avg_rainfall": 3800,
+    "market_access": "Limited",
+    "irrigation": "Limited",
+    "speciality": [
+      "Boro Rice",
+      "Fish",
+      "Citrus Macroptera (সাতকরা)",
+      "Mustard"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+<svg width="420" height="120" viewBox="0 0 420 120" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>AgroMitra logo</title>
+  <desc>A stylized leaf mark formed by two curved blades meeting at a connecting node, beside the wordmark AgroMitra, in deep paddy green and turmeric gold.</desc>
+
+  <defs>
+    <linearGradient id="leafGradLeft" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#143D31"/>
+      <stop offset="100%" stop-color="#1B5E20"/>
+    </linearGradient>
+    <linearGradient id="leafGradRight" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2E7D32"/>
+      <stop offset="100%" stop-color="#4CAF50"/>
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(8,8)">
+    <circle cx="52" cy="52" r="52" fill="#0E2E24"/>
+
+    <path d="M 52 88
+             C 30 88 16 70 16 48
+             C 16 30 28 16 44 14
+             C 40 30 42 50 52 64
+             C 44 56 32 50 22 50
+             C 26 70 38 84 52 88 Z"
+          fill="url(#leafGradLeft)"/>
+
+    <path d="M 52 88
+             C 74 88 88 70 88 48
+             C 88 30 76 16 60 14
+             C 64 30 62 50 52 64
+             C 60 56 72 50 82 50
+             C 78 70 66 84 52 88 Z"
+          fill="url(#leafGradRight)"/>
+
+    <circle cx="52" cy="64" r="5.5" fill="#F9A825"/>
+    <circle cx="30" cy="48" r="3" fill="#F9A825" opacity="0.85"/>
+    <circle cx="74" cy="48" r="3" fill="#F9A825" opacity="0.85"/>
+    <path d="M 33 49 L 47 62" stroke="#F9A825" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+    <path d="M 71 49 L 57 62" stroke="#F9A825" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  </g>
+
+  <g transform="translate(132,42)" font-family="Georgia, 'Times New Roman', serif">
+    <text x="0" y="0" font-size="34" font-weight="700" fill="#0E2E24">Agro<tspan fill="#C97D1F">Mitra</tspan></text>
+    <text x="2" y="22" font-family="'Segoe UI', system-ui, sans-serif" font-size="12" letter-spacing="2.4" fill="#546E7A">FARM TO MARKET, DIRECTLY</text>
+  </g>
+</svg>

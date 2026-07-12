@@ -1,0 +1,42 @@
+{
+  "Bogura": {
+    "soil_type": "Loam",
+    "avg_temp": 26,
+    "avg_rainfall": 1500,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": "Vegetables"
+  },
+  "Rajshahi": {
+    "soil_type": "Sandy Loam",
+    "avg_temp": 27,
+    "avg_rainfall": 1400,
+    "market_access": "Good",
+    "irrigation": "Available",
+    "speciality": "Fruits & Spices"
+  },
+  "Cumilla": {
+    "soil_type": "Clay Loam",
+    "avg_temp": 26,
+    "avg_rainfall": 1800,
+    "market_access": "Good",
+    "irrigation": "Limited",
+    "speciality": "Mixed Vegetables"
+  },
+  "Dhaka": {
+    "soil_type": "Loam",
+    "avg_temp": 27,
+    "avg_rainfall": 1800,
+    "market_access": "Excellent",
+    "irrigation": "Available",
+    "speciality": "Peri-urban Vegetables"
+  },
+  "Chattogram": {
+    "soil_type": "Clay Loam",
+    "avg_temp": 27,
+    "avg_rainfall": 2800,
+    "market_access": "Excellent",
+    "irrigation": "Available",
+    "speciality": "Mixed Crops"
+  }
+}

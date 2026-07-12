@@ -1,0 +1,352 @@
+{
+  "Tomato": {
+    "name_bn": "টমেটো",
+    "category": "Vegetable",
+    "grow_days": 75,
+    "best_months": [
+      10,
+      11,
+      12,
+      1,
+      2
+    ],
+    "soil_types": [
+      "Loam",
+      "Sandy Loam",
+      "Clay Loam"
+    ],
+    "water_need": "Medium",
+    "temp_min": 15,
+    "temp_max": 30,
+    "rainfall_min": 60,
+    "rainfall_max": 120,
+    "avg_yield_kg": 8000,
+    "avg_price_bdt": 28,
+    "input_cost_bdt": 35000,
+    "districts": [
+      "Bogura",
+      "Rajshahi",
+      "Cumilla",
+      "Dhaka",
+      "Chattogram"
+    ],
+    "difficulty": "Medium",
+    "market_demand": "High",
+    "export_potential": false,
+    "organic_possible": true,
+    "risk_level": "Medium"
+  },
+  "Onion": {
+    "name_bn": "পেঁয়াজ",
+    "category": "Vegetable",
+    "grow_days": 120,
+    "best_months": [
+      10,
+      11,
+      12,
+      1,
+      2,
+      3
+    ],
+    "soil_types": [
+      "Loam",
+      "Sandy Loam"
+    ],
+    "water_need": "Low",
+    "temp_min": 13,
+    "temp_max": 28,
+    "rainfall_min": 50,
+    "rainfall_max": 100,
+    "avg_yield_kg": 7000,
+    "avg_price_bdt": 45,
+    "input_cost_bdt": 40000,
+    "districts": [
+      "Rajshahi",
+      "Pabna",
+      "Bogura",
+      "Faridpur"
+    ],
+    "difficulty": "Medium",
+    "market_demand": "Very High",
+    "export_potential": true,
+    "organic_possible": false,
+    "risk_level": "Medium"
+  },
+  "Potato": {
+    "name_bn": "আলু",
+    "category": "Vegetable",
+    "grow_days": 90,
+    "best_months": [
+      10,
+      11,
+      12,
+      1
+    ],
+    "soil_types": [
+      "Sandy Loam",
+      "Loam"
+    ],
+    "water_need": "Medium",
+    "temp_min": 10,
+    "temp_max": 25,
+    "rainfall_min": 60,
+    "rainfall_max": 110,
+    "avg_yield_kg": 20000,
+    "avg_price_bdt": 22,
+    "input_cost_bdt": 50000,
+    "districts": [
+      "Bogura",
+      "Rangpur",
+      "Munshiganj",
+      "Comilla"
+    ],
+    "difficulty": "Easy",
+    "market_demand": "Very High",
+    "export_potential": true,
+    "organic_possible": false,
+    "risk_level": "Low"
+  },
+  "Brinjal": {
+    "name_bn": "বেগুন",
+    "category": "Vegetable",
+    "grow_days": 60,
+    "best_months": [
+      1,
+      2,
+      3,
+      9,
+      10,
+      11
+    ],
+    "soil_types": [
+      "Loam",
+      "Clay Loam",
+      "Sandy Loam"
+    ],
+    "water_need": "Medium",
+    "temp_min": 18,
+    "temp_max": 35,
+    "rainfall_min": 70,
+    "rainfall_max": 130,
+    "avg_yield_kg": 12000,
+    "avg_price_bdt": 30,
+    "input_cost_bdt": 28000,
+    "districts": [
+      "Bogura",
+      "Cumilla",
+      "Dhaka",
+      "Rajshahi",
+      "Chattogram"
+    ],
+    "difficulty": "Easy",
+    "market_demand": "High",
+    "export_potential": false,
+    "organic_possible": true,
+    "risk_level": "Low"
+  },
+  "Cabbage": {
+    "name_bn": "বাঁধাকপি",
+    "category": "Vegetable",
+    "grow_days": 70,
+    "best_months": [
+      10,
+      11,
+      12,
+      1,
+      2
+    ],
+    "soil_types": [
+      "Loam",
+      "Clay Loam"
+    ],
+    "water_need": "Medium",
+    "temp_min": 10,
+    "temp_max": 25,
+    "rainfall_min": 60,
+    "rainfall_max": 120,
+    "avg_yield_kg": 25000,
+    "avg_price_bdt": 20,
+    "input_cost_bdt": 25000,
+    "districts": [
+      "Bogura",
+      "Rajshahi",
+      "Cumilla",
+      "Dhaka"
+    ],
+    "difficulty": "Easy",
+    "market_demand": "High",
+    "export_potential": false,
+    "organic_possible": true,
+    "risk_level": "Low"
+  },
+  "Cauliflower": {
+    "name_bn": "ফুলকপি",
+    "category": "Vegetable",
+    "grow_days": 65,
+    "best_months": [
+      10,
+      11,
+      12,
+      1,
+      2
+    ],
+    "soil_types": [
+      "Loam",
+      "Clay Loam"
+    ],
+    "water_need": "Medium",
+    "temp_min": 12,
+    "temp_max": 25,
+    "rainfall_min": 60,
+    "rainfall_max": 110,
+    "avg_yield_kg": 15000,
+    "avg_price_bdt": 28,
+    "input_cost_bdt": 28000,
+    "districts": [
+      "Bogura",
+      "Rajshahi",
+      "Cumilla",
+      "Dhaka"
+    ],
+    "difficulty": "Medium",
+    "market_demand": "High",
+    "export_potential": false,
+    "organic_possible": true,
+    "risk_level": "Low"
+  },
+  "Garlic": {
+    "name_bn": "রসুন",
+    "category": "Spice",
+    "grow_days": 150,
+    "best_months": [
+      10,
+      11,
+      12
+    ],
+    "soil_types": [
+      "Sandy Loam",
+      "Loam"
+    ],
+    "water_need": "Low",
+    "temp_min": 12,
+    "temp_max": 28,
+    "rainfall_min": 40,
+    "rainfall_max": 90,
+    "avg_yield_kg": 5000,
+    "avg_price_bdt": 85,
+    "input_cost_bdt": 45000,
+    "districts": [
+      "Rajshahi",
+      "Faridpur",
+      "Bogura",
+      "Pabna"
+    ],
+    "difficulty": "Hard",
+    "market_demand": "Very High",
+    "export_potential": true,
+    "organic_possible": false,
+    "risk_level": "High"
+  },
+  "Carrot": {
+    "name_bn": "গাজর",
+    "category": "Vegetable",
+    "grow_days": 80,
+    "best_months": [
+      10,
+      11,
+      12,
+      1
+    ],
+    "soil_types": [
+      "Sandy Loam",
+      "Loam"
+    ],
+    "water_need": "Medium",
+    "temp_min": 10,
+    "temp_max": 22,
+    "rainfall_min": 50,
+    "rainfall_max": 100,
+    "avg_yield_kg": 18000,
+    "avg_price_bdt": 35,
+    "input_cost_bdt": 30000,
+    "districts": [
+      "Bogura",
+      "Rajshahi",
+      "Dhaka"
+    ],
+    "difficulty": "Medium",
+    "market_demand": "Medium",
+    "export_potential": false,
+    "organic_possible": true,
+    "risk_level": "Medium"
+  },
+  "Rice": {
+    "name_bn": "ধান",
+    "category": "Grain",
+    "grow_days": 120,
+    "best_months": [
+      5,
+      6,
+      7,
+      11,
+      12
+    ],
+    "soil_types": [
+      "Clay",
+      "Clay Loam",
+      "Loam"
+    ],
+    "water_need": "High",
+    "temp_min": 20,
+    "temp_max": 38,
+    "rainfall_min": 150,
+    "rainfall_max": 300,
+    "avg_yield_kg": 4500,
+    "avg_price_bdt": 55,
+    "input_cost_bdt": 30000,
+    "districts": [
+      "Bogura",
+      "Rajshahi",
+      "Cumilla",
+      "Dhaka",
+      "Chattogram"
+    ],
+    "difficulty": "Easy",
+    "market_demand": "Very High",
+    "export_potential": false,
+    "organic_possible": true,
+    "risk_level": "Low"
+  },
+  "Ginger": {
+    "name_bn": "আদা",
+    "category": "Spice",
+    "grow_days": 240,
+    "best_months": [
+      3,
+      4,
+      5
+    ],
+    "soil_types": [
+      "Sandy Loam",
+      "Loam"
+    ],
+    "water_need": "Medium",
+    "temp_min": 20,
+    "temp_max": 35,
+    "rainfall_min": 150,
+    "rainfall_max": 250,
+    "avg_yield_kg": 8000,
+    "avg_price_bdt": 90,
+    "input_cost_bdt": 60000,
+    "districts": [
+      "Rajshahi",
+      "Rangpur",
+      "Sylhet"
+    ],
+    "difficulty": "Hard",
+    "market_demand": "High",
+    "export_potential": true,
+    "organic_possible": true,
+    "risk_level": "High"
+  }
+}

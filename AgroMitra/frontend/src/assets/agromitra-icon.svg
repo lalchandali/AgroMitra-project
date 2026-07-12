@@ -1,0 +1,39 @@
+<svg width="104" height="104" viewBox="0 0 104 104" xmlns="http://www.w3.org/2000/svg" role="img">
+  <title>AgroMitra icon</title>
+  <desc>A circular mark with two curved leaf blades meeting at a golden connecting node, symbolizing farmer and buyer joined directly.</desc>
+
+  <defs>
+    <linearGradient id="iconLeafLeft" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#143D31"/>
+      <stop offset="100%" stop-color="#1B5E20"/>
+    </linearGradient>
+    <linearGradient id="iconLeafRight" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2E7D32"/>
+      <stop offset="100%" stop-color="#4CAF50"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="52" cy="52" r="52" fill="#0E2E24"/>
+
+  <path d="M 52 88
+           C 30 88 16 70 16 48
+           C 16 30 28 16 44 14
+           C 40 30 42 50 52 64
+           C 44 56 32 50 22 50
+           C 26 70 38 84 52 88 Z"
+        fill="url(#iconLeafLeft)"/>
+
+  <path d="M 52 88
+           C 74 88 88 70 88 48
+           C 88 30 76 16 60 14
+           C 64 30 62 50 52 64
+           C 60 56 72 50 82 50
+           C 78 70 66 84 52 88 Z"
+        fill="url(#iconLeafRight)"/>
+
+  <circle cx="52" cy="64" r="5.5" fill="#F9A825"/>
+  <circle cx="30" cy="48" r="3" fill="#F9A825" opacity="0.85"/>
+  <circle cx="74" cy="48" r="3" fill="#F9A825" opacity="0.85"/>
+  <path d="M 33 49 L 47 62" stroke="#F9A825" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  <path d="M 71 49 L 57 62" stroke="#F9A825" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+</svg>

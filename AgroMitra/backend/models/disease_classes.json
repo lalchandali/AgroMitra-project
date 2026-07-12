@@ -1,0 +1,128 @@
+{
+  "Tomato___Bacterial_spot": {
+    "crop": "Tomato",
+    "status": "Diseased",
+    "severity": "Medium",
+    "treatment": "Copper-based bactericide spray"
+  },
+  "Tomato___Early_blight": {
+    "crop": "Tomato",
+    "status": "Diseased",
+    "severity": "Medium",
+    "treatment": "Remove infected leaves, apply fungicide"
+  },
+  "Tomato___Late_blight": {
+    "crop": "Tomato",
+    "status": "Diseased",
+    "severity": "High",
+    "treatment": "Apply chlorothalonil fungicide immediately"
+  },
+  "Tomato___Leaf_Mold": {
+    "crop": "Tomato",
+    "status": "Diseased",
+    "severity": "Medium",
+    "treatment": "Improve ventilation, apply fungicide"
+  },
+  "Tomato___Septoria_leaf_spot": {
+    "crop": "Tomato",
+    "status": "Diseased",
+    "severity": "Medium",
+    "treatment": "Remove lower leaves, apply mancozeb"
+  },
+  "Tomato___Spider_mites": {
+    "crop": "Tomato",
+    "status": "Diseased",
+    "severity": "Medium",
+    "treatment": "Apply miticide or neem oil"
+  },
+  "Tomato___Target_Spot": {
+    "crop": "Tomato",
+    "status": "Diseased",
+    "severity": "Medium",
+    "treatment": "Apply fungicide, improve air circulation"
+  },
+  "Tomato___Tomato_Yellow_Leaf_Curl_Virus": {
+    "crop": "Tomato",
+    "status": "Diseased",
+    "severity": "High",
+    "treatment": "Remove infected plants, control whiteflies"
+  },
+  "Tomato___Tomato_mosaic_virus": {
+    "crop": "Tomato",
+    "status": "Diseased",
+    "severity": "High",
+    "treatment": "Remove infected plants, use resistant varieties"
+  },
+  "Tomato___healthy": {
+    "crop": "Tomato",
+    "status": "Healthy",
+    "severity": "None",
+    "treatment": "No treatment needed"
+  },
+  "Potato___Early_blight": {
+    "crop": "Potato",
+    "status": "Diseased",
+    "severity": "Medium",
+    "treatment": "Apply mancozeb or chlorothalonil fungicide"
+  },
+  "Potato___Late_blight": {
+    "crop": "Potato",
+    "status": "Diseased",
+    "severity": "High",
+    "treatment": "Apply metalaxyl fungicide immediately"
+  },
+  "Potato___healthy": {
+    "crop": "Potato",
+    "status": "Healthy",
+    "severity": "None",
+    "treatment": "No treatment needed"
+  },
+  "Rice___Brown_Spot": {
+    "crop": "Rice",
+    "status": "Diseased",
+    "severity": "Medium",
+    "treatment": "Apply tricyclazole or isoprothiolane"
+  },
+  "Rice___Leaf_Blast": {
+    "crop": "Rice",
+    "status": "Diseased",
+    "severity": "High",
+    "treatment": "Apply tricyclazole fungicide"
+  },
+  "Rice___Neck_Blast": {
+    "crop": "Rice",
+    "status": "Diseased",
+    "severity": "High",
+    "treatment": "Apply fungicide at heading stage"
+  },
+  "Rice___healthy": {
+    "crop": "Rice",
+    "status": "Healthy",
+    "severity": "None",
+    "treatment": "No treatment needed"
+  },
+  "Corn_(maize)___Cercospora_leaf_spot": {
+    "crop": "Corn",
+    "status": "Diseased",
+    "severity": "Medium",
+    "treatment": "Apply strobilurin fungicide"
+  },
+  "Corn_(maize)___Common_rust_": {
+    "crop": "Corn",
+    "status": "Diseased",
+    "severity": "Medium",
+    "treatment": "Apply mancozeb or trifloxystrobin"
+  },
+  "Corn_(maize)___Northern_Leaf_Blight": {
+    "crop": "Corn",
+    "status": "Diseased",
+    "severity": "High",
+    "treatment": "Apply fungicide at tasseling"
+  },
+  "Corn_(maize)___healthy": {
+    "crop": "Corn",
+    "status": "Healthy",
+    "severity": "None",
+    "treatment": "No treatment needed"
+  }
+}

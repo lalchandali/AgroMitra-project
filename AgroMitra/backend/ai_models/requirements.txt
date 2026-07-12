@@ -1,0 +1,9 @@
+matplotlib
+pandas
+numpy
+scikit-learn
+tensorflow-cpu
+fastapi
+uvicorn
+SQLAlchemy>=2.0
+psycopg2-binary

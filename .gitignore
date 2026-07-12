@@ -1,0 +1,7 @@
+.vscode/
+*.zip
+*.docx
+repo_clean_status.txt
+__pycache__/
+*.py[cod]
+

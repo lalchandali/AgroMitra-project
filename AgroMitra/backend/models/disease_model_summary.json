@@ -1,0 +1,9 @@
+{
+  "model": "MobileNetV2 Transfer Learning",
+  "num_classes": 8,
+  "accuracy": 15.0,
+  "img_size": 224,
+  "trained_at": "2026-06-11T13:44:25.254835",
+  "university": "Uttara University",
+  "has_real_data": true
+}
