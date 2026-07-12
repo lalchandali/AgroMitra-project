@@ -1,7 +1,7 @@
 # 🌾 AgroMitra – AI-Powered Agricultural Marketplace
 
 <p align="center">
-  <img src="AgroMitra\frontend\src\assets\icone.PNG" alt="AgroMitra Logo" width="140">
+  <img src="AgroMitra\frontend\src\assets\icone.png" alt="AgroMitra Logo" width="140">
 </p>
 
 <p align="center">
