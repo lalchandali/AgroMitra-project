@@ -450,7 +450,7 @@ export default function AdminPanel() {
                       <td style={{ fontFamily: 'monospace', fontSize: 12 }}>#{o.order_id?.slice(-6)}</td>
                       <td style={{ fontSize: 13 }}>{nameFor(o.farmer_id) || <span style={{ fontFamily: 'monospace', color: '#9E9E9E' }}>#{o.farmer_id?.slice(-6)}</span>}</td>
                       <td style={{ fontSize: 13 }}>{nameFor(o.buyer_id) || <span style={{ fontFamily: 'monospace', color: '#9E9E9E' }}>#{o.buyer_id?.slice(-6)}</span>}</td>
-                      <td>{o.quantity_kg} kg</td>
+                      <td>{(o.items || []).reduce((sum, it) => sum + Number(it.quantity_kg || 0), 0)} kg</td>
                       <td style={{ color: '#2E7D32', fontWeight: 600 }}>৳{o.total_amount?.toLocaleString()}</td>
                       <td style={{ color: '#546E7A' }}>৳{o.platform_fee?.toLocaleString()}</td>
                       <td><span className={`badge ${orderBadge(o.status)}`}>{o.status}</span></td>

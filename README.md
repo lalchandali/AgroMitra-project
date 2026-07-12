@@ -19,7 +19,7 @@ Batch 60-C (Evening) · Supervisor: Md. Ashraful Kabir
 
 ## 📖 About
 
-AgroMitra (আগ্রোমিত্র — "farmer's friend") is a bilingual (Bengali/English) web platform that connects **farmers directly with buyers** across Bangladesh, cutting out middlemen and giving farmers fair, data-informed prices. It combines a full e-commerce marketplace with **machine learning models** trained on agricultural data covering all 64 districts of Bangladesh.
+AgroMitra ("farmer's friend") is a bilingual (Bengali/English) web platform that connects **farmers directly with buyers** across Bangladesh, cutting out middlemen and giving farmers fair, data-informed prices. It combines a full e-commerce marketplace with **machine learning models** trained on agricultural data covering all 64 districts of Bangladesh.
 
 ## ✨ Key Features
 

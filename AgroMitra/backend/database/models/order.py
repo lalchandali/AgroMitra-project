@@ -53,11 +53,11 @@ class Order(Base):
 
     farmer_id = Column(UUID(as_uuid=True), ForeignKey(
         "users.user_id"), nullable=False)
-    product_id = Column(UUID(as_uuid=True), ForeignKey(
-        "products.product_id"), nullable=False)
+    # ── product_id / quantity_kg / unit_price এখন এখানে নেই ──
+    # একটা order-এ একাধিক product থাকতে পারে, তাই সেগুলো এখন
+    # OrderItem (order_items টেবিল)-এ প্রতিটা লাইন হিসেবে থাকে।
+    # (backend/database/models/order_item.py দেখুন)
 
-    quantity_kg = Column(Numeric(10, 2), nullable=False)
-    unit_price = Column(Numeric(10, 2), nullable=False)
     total_amount = Column(Numeric(12, 2), nullable=False)
     platform_fee = Column(Numeric(10, 2), nullable=False)
     farmer_amount = Column(Numeric(12, 2), nullable=False)
@@ -73,4 +73,4 @@ class Order(Base):
     delivered_at = Column(DateTime, nullable=True)
 
     def __repr__(self):
-        return f"<Order {self.order_id} - ৳{self.total_amount} - {self.status} - {self.payment_status} - {self.quantity_kg}kg>"
+        return f"<Order {self.order_id} - ৳{self.total_amount} - {self.status} - {self.payment_status}>"

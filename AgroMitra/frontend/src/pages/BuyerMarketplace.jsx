@@ -240,14 +240,25 @@ export default function BuyerMarketplace() {
       return
     }
 
+    // Cart-কে farmer অনুযায়ী group করো — একই farmer-এর সব product
+    // এক Order-এ (একাধিক item সহ) যাবে, আলাদা আলাদা order হবে না।
+    const groups = {}
+    for (const item of cart) {
+      const fid = item.product.farmer_id
+      if (!groups[fid]) groups[fid] = []
+      groups[fid].push(item)
+    }
+
     setPlacingOrder(true)
     const results = { success: 0, failed: 0 }
 
-    for (const item of cart) {
+    for (const fid of Object.keys(groups)) {
       try {
         await placeOrder({
-          product_id: item.product.product_id,
-          quantity_kg: item.quantity_kg,
+          items: groups[fid].map(item => ({
+            product_id: item.product.product_id,
+            quantity_kg: item.quantity_kg,
+          })),
           payment_method: paymentMethod,
           delivery_type: deliveryType,
           delivery_address: deliveryAddress,
@@ -655,21 +666,27 @@ export default function BuyerMarketplace() {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               {orders.map(o => {
-                const matchedProduct = products.find(p => p.product_id === o.product_id)
-                const productName = matchedProduct?.title_en || o.product_name || 'Product'
-                const productEmoji = matchedProduct ? getEmoji(matchedProduct) : '🌿'
+                const items = o.items || []
+                const firstItem = items[0]
+                const firstProduct = firstItem ? products.find(p => p.product_id === firstItem.product_id) : null
+                const firstEmoji = firstProduct ? getEmoji(firstProduct) : '🌿'
                 const statusCfg = ORDER_STATUS_CONFIG[o.status?.toLowerCase()] || ORDER_STATUS_CONFIG.placed
+                const totalKg = items.reduce((sum, i) => sum + Number(i.quantity_kg || 0), 0)
 
                 return (
                   <div key={o.order_id} className="card" style={{ cursor: 'pointer' }}
                     onClick={() => setSelectedOrder(o)}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
-                      <div style={{ display: 'flex', gap: 14, alignItems: 'center', flex: 1 }}>
-                        <span style={{ fontSize: 36 }}>{productEmoji}</span>
+                      <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start', flex: 1 }}>
+                        <span style={{ fontSize: 36 }}>{firstEmoji}</span>
                         <div>
-                          <div style={{ fontWeight: 700, fontSize: 15 }}>{productName}</div>
+                          <div style={{ fontWeight: 700, fontSize: 15 }}>
+                            {items.length === 1
+                              ? (firstItem?.product_name || 'Product')
+                              : `${firstItem?.product_name || 'Product'} + ${items.length - 1} more`}
+                          </div>
                           <div style={{ fontSize: 13, color: '#546E7A', marginTop: 2 }}>
-                            {o.quantity_kg} kg · ৳{o.unit_price}/kg · {fmtDate(o.created_at)} {fmtTime(o.created_at)}
+                            👨‍🌾 {o.farmer_name || 'Farmer'} · {items.length} item{items.length > 1 ? 's' : ''} · {totalKg} kg · {fmtDate(o.created_at)} {fmtTime(o.created_at)}
                           </div>
                           <div style={{ fontSize: 13, color: '#546E7A' }}>
                             {o.delivery_type === 'pickup' ? '📦 Pickup' : '🚚 Delivery'} ·{' '}
@@ -773,8 +790,7 @@ export default function BuyerMarketplace() {
           {/* Order Detail Modal */}
           {selectedOrder && (() => {
             const o = selectedOrder
-            const matchedProduct = products.find(p => p.product_id === o.product_id)
-            const productName = matchedProduct?.title_en || o.product_name || 'Product'
+            const items = o.items || []
             const statusCfg = ORDER_STATUS_CONFIG[o.status?.toLowerCase()] || ORDER_STATUS_CONFIG.placed
             return (
               <div style={{
@@ -805,12 +821,38 @@ export default function BuyerMarketplace() {
                     {statusCfg.icon} {statusCfg.label}
                   </div>
 
+                  {/* Items — একটা order-এ একই farmer-এর একাধিক product থাকতে পারে */}
+                  <div style={{ marginBottom: 16 }}>
+                    <div style={{ fontSize: 11, color: '#9E9E9E', fontWeight: 600, textTransform: 'uppercase', marginBottom: 8 }}>
+                      Items ({items.length})
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      {items.map(item => {
+                        const matchedProduct = products.find(p => p.product_id === item.product_id)
+                        const emoji = matchedProduct ? getEmoji(matchedProduct) : '🌿'
+                        return (
+                          <div key={item.order_item_id} style={{
+                            display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                            background: '#F8FAFC', padding: '10px 12px', borderRadius: 8, gap: 8
+                          }}>
+                            <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                              <span style={{ fontSize: 20 }}>{emoji}</span>
+                              <div>
+                                <div style={{ fontSize: 14, fontWeight: 600 }}>{item.product_name || 'Product'}</div>
+                                <div style={{ fontSize: 12, color: '#546E7A' }}>{item.quantity_kg} kg × ৳{item.unit_price}/kg</div>
+                              </div>
+                            </div>
+                            <div style={{ fontSize: 14, fontWeight: 700, color: '#2E7D32' }}>৳{item.subtotal?.toLocaleString()}</div>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+
                   {/* Info grid */}
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 16 }}>
                     {[
-                      { label: 'Product', val: productName },
-                      { label: 'Quantity', val: `${o.quantity_kg} kg` },
-                      { label: T('unitPrice'), val: `৳${o.unit_price}/kg` },
+                      { label: 'Farmer', val: o.farmer_name || 'Farmer' },
                       { label: T('orderDate'), val: `${fmtDate(o.created_at)} ${fmtTime(o.created_at)}` },
                       { label: 'Delivery', val: o.delivery_type === 'pickup' ? '📦 Pickup' : '🚚 Home Delivery' },
                       { label: 'Payment', val: o.payment_method?.replace('_', ' ') },

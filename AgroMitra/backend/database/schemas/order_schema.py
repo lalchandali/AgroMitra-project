@@ -1,35 +1,26 @@
 # ============================================================
 #   AgroMitra — Order Schemas (Pydantic)
+#   একটা Order-এ এখন একাধিক OrderItem (product line) থাকতে পারে।
 # ============================================================
 
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 from uuid import UUID
 from backend.database.models.order import OrderStatus, PaymentStatus, PaymentMethod, DeliveryType
 
 
-# ── Nested Mini Schemas for Relationship Data ──────────────────
-class ProductMinimalResponse(BaseModel):
-    title: str = Field(..., example="দেশী আলু (Diamond)")
-    # ভবিষ্যতে প্রোডাক্টের ছবি বা ক্যাটাগরি লাগলে এখানে যোগ করতে পারবেন
-
-    class Config:
-        from_attributes = True
-
-
-class UserMinimalResponse(BaseModel):
-    full_name: str = Field(..., example="মোঃ রফিকুল ইসলাম")
-    # ফোন নম্বর বা প্রোফাইল পিকচার লাগলে এখানে যোগ করা যাবে
-
-    class Config:
-        from_attributes = True
-
-
 # ── Place Order ───────────────────────────────────────────────
-class OrderCreate(BaseModel):
+class OrderItemCreate(BaseModel):
     product_id: UUID
     quantity_kg: float = Field(..., gt=0, example=50.0)
+
+
+class OrderCreate(BaseModel):
+    # সব item একই farmer-এর হতে হবে — এক Order = এক farmer-এর একটা checkout।
+    # আলাদা farmer-এর product থাকলে frontend প্রতি farmer-এর জন্য আলাদা
+    # OrderCreate পাঠাবে (cart-কে farmer অনুযায়ী group করে)।
+    items: List[OrderItemCreate] = Field(..., min_length=1)
     payment_method: PaymentMethod = Field(..., example="bkash")
     delivery_type: DeliveryType = Field(..., example="pickup")
     delivery_address: Optional[str] = Field(
@@ -41,14 +32,26 @@ class OrderStatusUpdate(BaseModel):
     status: OrderStatus = Field(..., example="confirmed")
 
 
+# ── Order Item Response ─────────────────────────────────────
+class OrderItemResponse(BaseModel):
+    order_item_id: UUID
+    product_id: UUID
+    quantity_kg: float
+    unit_price: float
+    subtotal: float
+    product_name: Optional[str] = None
+    product_name_bn: Optional[str] = None
+    product_image_url: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+
 # ── Order Response ────────────────────────────────────────────
 class OrderResponse(BaseModel):
     order_id: UUID
     buyer_id: UUID
     farmer_id: UUID
-    product_id: UUID
-    quantity_kg: float
-    unit_price: float
     total_amount: float
     platform_fee: float
     farmer_amount: float
@@ -60,12 +63,9 @@ class OrderResponse(BaseModel):
     created_at: datetime
     confirmed_at: Optional[datetime]
     delivered_at: Optional[datetime]
-    product: Optional[ProductMinimalResponse] = None
-    buyer: Optional[UserMinimalResponse] = None
-    farmer: Optional[UserMinimalResponse] = None
-    product_name: Optional[str] = None
     buyer_name: Optional[str] = None
     farmer_name: Optional[str] = None
+    items: List[OrderItemResponse] = []
 
     class Config:
         from_attributes = True

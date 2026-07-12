@@ -128,21 +128,28 @@ function OrderDetailModal({ order: o, onClose, onStatusUpdate }) {
             <div className="fd-detail-val">{o.buyer_name || T('unknownBuyer')}</div>
           </div>
 
-          {/* Product */}
-          <div className="fd-detail-section">
-            <div className="fd-detail-label">Product Name</div>
-            <div className="fd-detail-val">{o.product_name || T('unknownProduct')}</div>
-          </div>
-
-          {/* Quantity & Price */}
-          <div className="fd-detail-section">
-            <div className="fd-detail-label">Quantity</div>
-            <div className="fd-detail-val">{o.quantity_kg} kg</div>
-          </div>
-
-          <div className="fd-detail-section">
-            <div className="fd-detail-label">Unit Price</div>
-            <div className="fd-detail-val">৳{o.unit_price}/kg</div>
+          {/* Items — একটা order-এ একই buyer-এর একাধিক product থাকতে পারে */}
+          <div className="fd-detail-section fd-detail-section--full">
+            <div className="fd-detail-label">Items ({(o.items || []).length})</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 6 }}>
+              {(o.items || []).map(item => (
+                <div key={item.order_item_id} style={{
+                  display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+                  background: 'var(--bg-muted, #F8FAFC)', padding: '10px 12px', borderRadius: 8, gap: 8
+                }}>
+                  <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                    <span style={{ fontSize: 18 }}>
+                      {CROP_EMOJIS[item.product_name?.split(' ').find(w => CROP_EMOJIS[w])] || '🌿'}
+                    </span>
+                    <div>
+                      <div className="fd-detail-val" style={{ fontSize: 14 }}>{item.product_name || T('unknownProduct')}</div>
+                      <div className="fd-detail-sub">{item.quantity_kg} kg × ৳{item.unit_price}/kg</div>
+                    </div>
+                  </div>
+                  <div style={{ fontWeight: 700, color: '#2E7D32' }}>৳{item.subtotal?.toLocaleString()}</div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Delivery */}
@@ -665,6 +672,12 @@ return (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {orders.slice(0, 5).map((o, i) => {
                   const cfg = STATUS_CONFIG[o.status?.toLowerCase()] || STATUS_CONFIG.pending
+                  const items = o.items || []
+                  const firstItem = items[0]
+                  const totalKg = items.reduce((sum, it) => sum + Number(it.quantity_kg || 0), 0)
+                  const label = items.length > 1
+                    ? `${firstItem?.product_name || 'Product'} + ${items.length - 1} more`
+                    : `${firstItem?.product_name || 'Product'} × ${totalKg} kg`
                   return (
                     <div key={i} style={{
                       display: 'flex', alignItems: 'center', gap: 12,
@@ -675,11 +688,11 @@ return (
                       onClick={() => { setSelectedOrder(o) }}
                     >
                       <span style={{ fontSize: 20 }}>
-                        {CROP_EMOJIS[o.product_name?.split(' ').find(w => CROP_EMOJIS[w])] || '🌿'}
+                        {CROP_EMOJIS[firstItem?.product_name?.split(' ').find(w => CROP_EMOJIS[w])] || '🌿'}
                       </span>
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ fontSize: 13, fontWeight: 600, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-                          {o.product_name || 'Product'} × {o.quantity_kg} kg
+                          {label}
                         </div>
                         <div style={{ fontSize: 11, color: 'var(--gray)' }}>
                           {o.buyer_name || 'Buyer'} · {fmtDate(o.created_at)}
@@ -709,13 +722,16 @@ return (
         <div className="card" style={{ marginBottom: 20 }}>
           <div className="card-title">💹 Earnings Overview</div>
           {(() => {
-            // orders থেকে per-product earnings বানাও
+            // orders-এর প্রতিটা item থেকে per-product earnings বানাও
+            // (একটা order-এ একাধিক product থাকতে পারে, তাই order নয়, item ধরে group করা হচ্ছে)
             const earningsByProduct = {}
             orders
               .filter(o => o.status?.toLowerCase() === 'delivered')
               .forEach(o => {
-                const name = o.product_name || 'Unknown'
-                earningsByProduct[name] = (earningsByProduct[name] || 0) + (o.farmer_amount || o.total_amount || 0)
+                (o.items || []).forEach(item => {
+                  const name = item.product_name || 'Unknown'
+                  earningsByProduct[name] = (earningsByProduct[name] || 0) + (item.subtotal || 0)
+                })
               })
             const chartData = Object.entries(earningsByProduct)
               .map(([name, amount]) => ({ name, amount: Math.round(amount) }))
@@ -1083,6 +1099,9 @@ return (
                 <tbody>
                   {filteredOrders.map(o => {
                     const statusCfg = STATUS_CONFIG[o.status?.toLowerCase()] || STATUS_CONFIG.pending
+                    const items = o.items || []
+                    const firstItem = items[0]
+                    const totalKg = items.reduce((sum, it) => sum + Number(it.quantity_kg || 0), 0)
                     return (
                       <tr key={o.order_id} className="fd-order-row"
                         onClick={() => setSelectedOrder(o)}
@@ -1098,11 +1117,16 @@ return (
                         </td>
                         <td>
                           <strong>
-                            {CROP_EMOJIS[o.product_name?.split(' ').find(w => CROP_EMOJIS[w])] || '🌿'} {o.product_name || `#${o.product_id?.slice(-6)}`}
+                            {CROP_EMOJIS[firstItem?.product_name?.split(' ').find(w => CROP_EMOJIS[w])] || '🌿'}{' '}
+                            {items.length > 1
+                              ? `${firstItem?.product_name || 'Product'} + ${items.length - 1} more`
+                              : (firstItem?.product_name || `#${o.order_id?.slice(-6)}`)}
                           </strong>
-                          {o.product_name_bn && <div style={{ fontSize: 11, color: '#888' }}>{o.product_name_bn}</div>}
+                          {items.length === 1 && firstItem?.product_name_bn && (
+                            <div style={{ fontSize: 11, color: '#888' }}>{firstItem.product_name_bn}</div>
+                          )}
                         </td>
-                        <td><strong>{o.quantity_kg} kg</strong></td>
+                        <td><strong>{totalKg} kg</strong></td>
                         <td>
                           <span className="fd-earn">৳{(o.farmer_amount || o.total_amount)?.toLocaleString()}</span>
                           {o.platform_fee > 0 && (

@@ -93,6 +93,7 @@ try:
     from backend.database.models.user import User
     from backend.database.models.product import Product
     from backend.database.models.order import Order
+    from backend.database.models.order_item import OrderItem
     from backend.database.models.settings import PlatformSettings
     from backend.database.routes.auth_routes import router as auth_router
     from backend.database.routes.product_routes import router as product_router
