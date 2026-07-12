@@ -1,7 +1,11 @@
 # 🌾 AgroMitra – AI-Powered Agricultural Marketplace
 
 <p align="center">
+<<<<<<< HEAD
   <img src="AgroMitra\frontend\src\assets\icone.png" alt="AgroMitra Logo" width="140">
+=======
+  <img src="frontend/src/assets/icone.png" alt="AgroMitra Logo" width="140">
+>>>>>>> d4bd2af93a1180b7d8a685954390914e27ed1ae2
 </p>
 
 <p align="center">
@@ -23,7 +27,7 @@
 
 AgroMitra is a modern AI-powered agricultural marketplace developed to connect farmers and buyers through a secure, transparent, and intelligent platform.
 
-The platform enables farmers to sell products directly to buyers while utilizing AI-powered services such as crop price prediction, weather alerts, demand forecasting, and smart agricultural recommendations.
+The platform enables farmers to sell products directly to buyers while utilizing AI-powered services such as crop price prediction, weather alerts, demand forecasting, and smart agricultural recom[...]
 
 This project was developed as a Final Year CSE Project.
 
