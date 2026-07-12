@@ -9,3 +9,13 @@ dist/
 build/
 coverage/
 
+node_modules/
+dist/
+build/
+output/
+coverage/
+.pytest_cache/
+__pycache__/
+*.pyc
+.env
+.venv/
