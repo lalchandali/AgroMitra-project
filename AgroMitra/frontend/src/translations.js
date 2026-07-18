@@ -165,6 +165,17 @@ export const t = {
   deleteProduct:    { en: '🗑️ Delete',             bn: '🗑️ মুছুন' },
   showing:          { en: 'Showing',                bn: 'দেখানো হচ্ছে' },
   of:               { en: 'of',                     bn: 'এর মধ্যে' },
+  testimonials:     { en: '💬 Testimonials',         bn: '💬 মতামত' },
+  testimonialsMgmt: { en: '💬 Testimonial Moderation', bn: '💬 মতামত অনুমোদন' },
+  thQuote:          { en: 'Quote',                   bn: 'মতামত' },
+  thRating:         { en: 'Rating',                  bn: 'রেটিং' },
+  thUser:           { en: 'User',                    bn: 'ব্যবহারকারী' },
+  approveBtn:       { en: '✅ Approve',               bn: '✅ অনুমোদন' },
+  rejectBtn:        { en: '⏸️ Unapprove',            bn: '⏸️ বাতিল' },
+  deleteBtn:        { en: '🗑️ Delete',               bn: '🗑️ মুছুন' },
+  noTestimonials:   { en: 'No testimonials found',   bn: 'কোনো মতামত পাওয়া যায়নি' },
+  allTestimonials:  { en: 'All',                      bn: 'সব' },
+  approvedStatus:   { en: '✅ Approved',              bn: '✅ অনুমোদিত' },
 
   // ── Order status ──────────────────────────────────────────
   placed:           { en: 'Placed',                 bn: 'অর্ডার হয়েছে' },

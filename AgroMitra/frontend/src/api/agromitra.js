@@ -224,6 +224,38 @@ export const getReviewableItems = async () => {
   }
 }
 
+// ── Testimonials ─────────────────────────────────────────────
+export const getFeaturedTestimonials = async (limit = 6) => {
+  try {
+    return await API.get('/api/v1/testimonials/featured', { params: { limit } })
+  } catch (error) {
+    if (error?.response?.status === 404 || error?.response?.status === 405) {
+      return { data: [] }
+    }
+    throw error
+  }
+}
+
+export const submitTestimonial = (payload) => API.post('/api/v1/testimonials/', payload)
+
+export const getMyTestimonial = async () => {
+  try {
+    return await API.get('/api/v1/testimonials/my')
+  } catch (error) {
+    if (error?.response?.status === 404) return { data: null }
+    throw error
+  }
+}
+
+export const adminListTestimonials = (status = 'pending') =>
+  API.get('/api/v1/testimonials/admin/all', { params: { status } })
+
+export const adminSetTestimonialStatus = (testimonialId, isApproved) =>
+  API.put(`/api/v1/testimonials/admin/${testimonialId}/status`, { is_approved: isApproved })
+
+export const adminDeleteTestimonial = (testimonialId) =>
+  API.delete(`/api/v1/testimonials/admin/${testimonialId}`)
+
 // ── Misc ─────────────────────────────────────────────────────
 export const getCrops     = () => API.get('/api/v1/crops')
 export const getDistricts = () => API.get('/api/v1/districts')

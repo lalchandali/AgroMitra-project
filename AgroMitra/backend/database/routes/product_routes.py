@@ -147,10 +147,11 @@ async def get_products(
 
     products = query.order_by(Product.created_at.desc()).offset(skip).limit(limit).all()
 
-    # farmer_name join
+    # farmer_name + farmer_photo join
     farmer_ids = list({p.farmer_id for p in products})
     farmers = db.query(User).filter(User.user_id.in_(farmer_ids)).all()
     farmer_map = {str(f.user_id): f.name_en for f in farmers}
+    farmer_photo_map = {str(f.user_id): f.profile_photo_url for f in farmers}
 
     rating_map = _get_rating_map(db, [p.product_id for p in products])
 
@@ -161,6 +162,7 @@ async def get_products(
             "product_id": p.product_id,
             "farmer_id": p.farmer_id,
             "farmer_name": farmer_map.get(str(p.farmer_id)),
+            "farmer_photo_url": farmer_photo_map.get(str(p.farmer_id)),
             "title_en": p.title_en,
             "title_bn": p.title_bn,
             "category": p.category,
@@ -202,6 +204,7 @@ async def get_my_products(
             "product_id": p.product_id,
             "farmer_id": p.farmer_id,
             "farmer_name": current_user.name_en,
+            "farmer_photo_url": current_user.profile_photo_url,
             "title_en": p.title_en,
             "title_bn": p.title_bn,
             "category": p.category,
@@ -247,6 +250,7 @@ async def get_product(
         product_id=product.product_id,
         farmer_id=product.farmer_id,
         farmer_name=farmer.name_en if farmer else None,
+        farmer_photo_url=farmer.profile_photo_url if farmer else None,
         title_en=product.title_en,
         title_bn=product.title_bn,
         category=product.category,

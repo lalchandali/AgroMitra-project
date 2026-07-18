@@ -7,7 +7,8 @@ import {
   YAxis,
   Tooltip
 } from "recharts"
-import { getPricePrediction, getDemandForecast, getWeatherAlert, getSowingCalendar, getMarketPrices } from '../api/agromitra'
+import { getPricePrediction, getDemandForecast, getWeatherAlert, getSowingCalendar, getMarketPrices, getFeaturedTestimonials, submitTestimonial, getMyTestimonial, getStoredUser, resolveImageUrl } from '../api/agromitra'
+import toast from 'react-hot-toast'
 
 const features = [
   { icon: '🤖', title: 'AI Price Prediction', desc: 'Prophet + XGBoost hybrid model forecasts crop prices 7–30 days ahead with 12% MAPE accuracy.' },
@@ -24,6 +25,17 @@ const stats = [
   { val: '12%', label: 'AI MAPE Accuracy', icon: '🤖' },
   { val: '35%+', label: 'Farmer Income Increase', icon: '📈' },
 ]
+
+// role comes back from the API as an emoji-prefixed label (e.g. "🌾 Farmer").
+// This picks a bigger avatar emoji to show next to the testimonial author.
+const roleAvatar = (role) => {
+  if (!role) return '🧑'
+  if (role.includes('Farmer')) return '👨‍🌾'
+  if (role.includes('Buyer')) return '🧑‍💼'
+  if (role.includes('Consumer')) return '🧺'
+  if (role.includes('Admin')) return '🛠️'
+  return '🧑'
+}
 
 const gapRows = [
   { problem: 'Farmers earn only 20–40% of market price', solution: 'Direct farmer-to-buyer marketplace — zero middlemen' },
@@ -82,6 +94,17 @@ const Home = () => {
   const [calendarLoading, setCalendarLoading] = useState(false)
   const [calendarError, setCalendarError] = useState(false)
 
+  // ── Testimonials (dynamic, admin-approved) ────────────────────
+  const [testimonials, setTestimonials] = useState([])
+  const [testimonialsLoading, setTestimonialsLoading] = useState(true)
+  const [testimonialsError, setTestimonialsError] = useState(false)
+  const [showTestimonialForm, setShowTestimonialForm] = useState(false)
+  const [testimonialQuote, setTestimonialQuote] = useState('')
+  const [testimonialRating, setTestimonialRating] = useState(5)
+  const [testimonialSubmitting, setTestimonialSubmitting] = useState(false)
+  const [myTestimonial, setMyTestimonial] = useState(null)
+  const currentUser = getStoredUser()
+
   useEffect(() => {
     let cancelled = false
     setDemoLoading(true)
@@ -134,6 +157,48 @@ const Home = () => {
       .finally(() => { if (!cancelled) setCalendarLoading(false) })
     return () => { cancelled = true }
   }, [])
+
+  // ── Fetch approved testimonials for the homepage (once) ────────
+  useEffect(() => {
+    let cancelled = false
+    setTestimonialsLoading(true)
+    setTestimonialsError(false)
+    getFeaturedTestimonials(6)
+      .then(res => { if (!cancelled) setTestimonials(res.data || []) })
+      .catch(() => { if (!cancelled) setTestimonialsError(true) })
+      .finally(() => { if (!cancelled) setTestimonialsLoading(false) })
+    return () => { cancelled = true }
+  }, [])
+
+  // ── If logged in, check whether this user already has a testimonial ──
+  useEffect(() => {
+    if (!currentUser) return
+    let cancelled = false
+    getMyTestimonial()
+      .then(res => { if (!cancelled) setMyTestimonial(res.data) })
+      .catch(() => { })
+    return () => { cancelled = true }
+  }, [])
+
+  const handleTestimonialSubmit = async (e) => {
+    e.preventDefault()
+    if (testimonialQuote.trim().length < 10) {
+      toast.error('অন্তত ১০ অক্ষরের feedback লিখুন।')
+      return
+    }
+    setTestimonialSubmitting(true)
+    try {
+      const res = await submitTestimonial({ quote: testimonialQuote.trim(), rating: testimonialRating })
+      setMyTestimonial(res.data)
+      setShowTestimonialForm(false)
+      setTestimonialQuote('')
+      toast.success('ধন্যবাদ! Admin approve করলেই এটা এখানে দেখা যাবে।')
+    } catch {
+      toast.error('জমা দিতে সমস্যা হয়েছে, আবার চেষ্টা করুন।')
+    } finally {
+      setTestimonialSubmitting(false)
+    }
+  }
 
   useEffect(() => {
     const els = rootRef.current?.querySelectorAll('.am-reveal, .am-flip-card, .am-stat')
@@ -599,71 +664,125 @@ const Home = () => {
           <h2>Real impact, real people</h2>
           <p className="am-section-sub">How AgroMitra is changing lives across Bangladesh.</p>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
-          {[
-            {
-              name: 'Mohammad Rahim',
-              role: '🌾 Farmer, Bogura',
-              quote: 'আগে দালালদের মাধ্যমে বিক্রি করতাম, দাম পেতাম না। AgroMitra-তে সরাসরি buyer পাই, দাম ৪০% বেশি পাচ্ছি।',
-              avatar: '👨‍🌾',
-              rating: 5,
-            },
-            {
-              name: 'Fatema Begum',
-              role: '🥕 Farmer, Dinajpur',
-              quote: 'AI crop recommendation দেখে এই মৌসুমে গাজর চাষ করলাম। বাজারে চাহিদা বেশি ছিল, ভালো লাভ হয়েছে।',
-              avatar: '👩‍🌾',
-              rating: 5,
-            },
-            {
-              name: 'Karim Hossain',
-              role: '🛒 Buyer, Dhaka',
-              quote: 'Fresh vegetables directly from farmers. Quality is much better than local market and prices are fair. The escrow payment gives me full confidence.',
-              avatar: '🧑‍💼',
-              rating: 5,
-            },
-            {
-              name: 'Nasrin Akter',
-              role: '🛒 Buyer, Chattogram',
-              quote: 'AI fair price feature helps me know if a listing is worth it. I saved almost ৳3,000 last month by comparing AI-suggested prices.',
-              avatar: '👩‍💼',
-              rating: 4,
-            },
-            {
-              name: 'Md. Rafiqul Islam',
-              role: '🌾 Farmer, Bogura',
-              quote: 'স্মার্ট এআই ফেয়ার প্রাইস এনালাইসিস দেখে সঠিক দামে আলু বিক্রি করতে পেরেছি। ফড়িয়াদের খপ্পরে পড়তে হয়নি, ন্যায্য মূল্য পেয়েছি।',
-              avatar: '👨‍🌾',
-              rating: 4.5,
-            },
-            {
-              name: 'Anisur Rahman',
-              role: '🥭 Merchant, Dhaka',
-              quote: 'সরাসরি চাষীদের থেকে এসক্রো পেমেন্টের মাধ্যমে আম কিনতে পেরে ব্যবসার ঝুক্কি অনেক কমে গেছে। টাকা এবং প্রোডাক্ট দুটোই একদম সেফ থাকে।',
-              avatar: '👨‍💼',
-              rating: 4.5,
-            }
 
-          ].map((t, i) => (
-            <div key={i} style={{
-              background: 'white', borderRadius: 12, padding: 24,
-              boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
-              borderLeft: '4px solid var(--green)',
-              display: 'flex', flexDirection: 'column', gap: 12
-            }}>
-              <div style={{ fontSize: 24 }}>{'⭐'.repeat(t.rating)}</div>
-              <p style={{ fontSize: 14, color: 'var(--gray-dark)', lineHeight: 1.7, fontStyle: 'italic' }}>
-                "{t.quote}"
-              </p>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 'auto' }}>
-                <span style={{ fontSize: 32 }}>{t.avatar}</span>
-                <div>
-                  <div style={{ fontWeight: 700, fontSize: 14 }}>{t.name}</div>
-                  <div style={{ fontSize: 12, color: 'var(--gray)' }}>{t.role}</div>
+        {testimonialsLoading && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+            {[1, 2, 3].map(i => (
+              <div key={i} style={{ background: 'white', borderRadius: 12, padding: 24, boxShadow: '0 2px 12px rgba(0,0,0,0.08)', height: 180, opacity: 0.5 }} />
+            ))}
+          </div>
+        )}
+
+        {!testimonialsLoading && testimonialsError && (
+          <p style={{ textAlign: 'center', color: 'var(--gray)' }}>এই মুহূর্তে stories লোড করা যাচ্ছে না।</p>
+        )}
+
+        {!testimonialsLoading && !testimonialsError && testimonials.length === 0 && (
+          <p style={{ textAlign: 'center', color: 'var(--gray)' }}>এখনো কোনো story approve হয়নি — প্রথম story-টা আপনিই দিন!</p>
+        )}
+
+        {!testimonialsLoading && !testimonialsError && testimonials.length > 0 && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 20 }}>
+            {testimonials.map((t) => (
+              <div key={t.testimonial_id} style={{
+                background: 'white', borderRadius: 12, padding: 24,
+                boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+                borderLeft: '4px solid var(--green)',
+                display: 'flex', flexDirection: 'column', gap: 12
+              }}>
+                <div style={{ fontSize: 24 }}>{'⭐'.repeat(t.rating)}</div>
+                <p style={{ fontSize: 14, color: 'var(--gray-dark)', lineHeight: 1.7, fontStyle: 'italic' }}>
+                  "{t.quote}"
+                </p>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 'auto' }}>
+                  {t.profile_photo_url ? (
+                    <img
+                      src={resolveImageUrl(t.profile_photo_url)}
+                      alt={t.name}
+                      style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+                      onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'inline' }}
+                    />
+                  ) : null}
+                  <span style={{ fontSize: 32, display: t.profile_photo_url ? 'none' : 'inline' }}>{roleAvatar(t.role)}</span>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: 14 }}>{t.name}</div>
+                    <div style={{ fontSize: 12, color: 'var(--gray)' }}>{t.role}{t.district ? `, ${t.district}` : ''}</div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+        )}
+
+        {/* Share your story CTA — only for logged-in users */}
+        <div style={{ textAlign: 'center', marginTop: 28 }}>
+          {!currentUser && (
+            <p style={{ color: 'var(--gray)', fontSize: 14 }}>
+              আপনারও কোনো experience আছে? <Link to="/auth" style={{ marginTop: 4, color: 'var(--green)', borderColor: 'var(--green)', fontWeight: 600, padding: '5px 10px', border: '1px solid var(--green)', borderWidth: 2, borderRadius: 8, cursor: 'pointer', background: 'white', textDecoration: 'none' }}> Login করে</Link> নিজের story শেয়ার করুন।
+            </p>
+          )}
+          {currentUser && myTestimonial && (
+            <p style={{ color: 'var(--gray)', fontSize: 14 }}>
+              {myTestimonial.is_approved
+                ? '✅ আপনার story এখানে দেখানো হচ্ছে। ধন্যবাদ!'
+                : '⏳ আপনার story জমা হয়েছে, admin approve করার অপেক্ষায় আছে।'}
+              {' '}
+              <button onClick={() => { setShowTestimonialForm(v => !v); setTestimonialQuote(myTestimonial.quote); setTestimonialRating(myTestimonial.rating) }}
+                style={{ background: 'none', border: 'none', color: 'var(--green)', fontWeight: 600, cursor: 'pointer', textDecoration: 'underline' }}>
+                Edit করুন
+              </button>
+            </p>
+          )}
+          {currentUser && !myTestimonial && !showTestimonialForm && (
+            <button className="am-btn am-btn-outline" onClick={() => setShowTestimonialForm(true)} style={{ marginTop: 12, color: 'var(--green)', borderColor: 'var(--green)', borderWidth: 3, fontWeight: 600, padding: '10px 20px', fontSize: 14, borderRadius: 8, cursor: 'pointer', }}>
+              ✍️ Share Your Story
+            </button>
+          )}
+
+          {currentUser && showTestimonialForm && (
+            <form onSubmit={handleTestimonialSubmit} style={{
+              maxWidth: 480, margin: '20px auto 0', background: 'white', borderRadius: 12,
+              padding: 24, boxShadow: '0 2px 12px rgba(0,0,0,0.08)', textAlign: 'left', display: 'flex', flexDirection: 'column', gap: 14
+            }}>
+              <div>
+                <label style={{ fontSize: 13, fontWeight: 600, display: 'block', marginBottom: 6 }}>Rating</label>
+                <div style={{ display: 'flex', gap: 4 }}>
+                  {[1, 2, 3, 4, 5].map(n => (
+                    <button
+                      key={n}
+                      type="button"
+                      onClick={() => setTestimonialRating(n)}
+                      aria-label={`${n} star`}
+                      style={{
+                        background: 'none', border: 'none', padding: 4,
+                        fontSize: 26, lineHeight: 1, cursor: 'pointer',
+                        opacity: n <= testimonialRating ? 1 : 0.3,
+                      }}
+                    >
+                      ⭐
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <label style={{ fontSize: 13, fontWeight: 600, display: 'block', marginBottom: 6 }}>আপনার feedback</label>
+                <textarea
+                  value={testimonialQuote}
+                  onChange={(e) => setTestimonialQuote(e.target.value)}
+                  maxLength={500}
+                  rows={4}
+                  placeholder="AgroMitra ব্যবহার করে আপনার অভিজ্ঞতা লিখুন..."
+                  style={{ width: '100%', padding: 10, borderRadius: 8, border: '1px solid #ddd', fontFamily: 'inherit', fontSize: 14, resize: 'vertical' }}
+                />
+              </div>
+              <div style={{ display: 'flex', gap: 10 }}>
+                <button type="submit" className="am-btn am-btn-primary" disabled={testimonialSubmitting}>
+                  {testimonialSubmitting ? 'জমা হচ্ছে...' : 'জমা দিন'}
+                </button>
+                <button type="button" className="am-btn am-btn-outline" onClick={() => setShowTestimonialForm(false)}>বাতিল</button>
+              </div>
+            </form>
+          )}
         </div>
       </section>
 

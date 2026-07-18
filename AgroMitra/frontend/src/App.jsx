@@ -52,11 +52,7 @@ function App() {
             </ProtectedRoute>
           } />
 
-          <Route path="/buyer" element={
-            <ProtectedRoute allowedRoles={['buyer', 'consumer']}>
-              <BuyerMarketplace />
-            </ProtectedRoute>
-          } />
+          <Route path="/buyer" element={<BuyerMarketplace />} />
 
           <Route path="/admin" element={
             <ProtectedRoute allowedRoles={['admin']}>

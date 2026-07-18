@@ -39,6 +39,7 @@ class ProductResponse(BaseModel):
     product_id     : UUID
     farmer_id      : UUID
     farmer_name    : Optional[str] = None   # joined from User table
+    farmer_photo_url: Optional[str] = None  # joined from User table
     title_en       : str
     title_bn       : Optional[str]
     category       : str

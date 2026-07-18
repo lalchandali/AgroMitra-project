@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import { getHealth, getAllOrders, getAllUsers, updateUserStatus, verifyUser, getAllProducts, deleteProduct, uploadProfilePhoto, updateProfile, getStoredUser, resolveImageUrl } from '../api/agromitra'
+import { getHealth, getAllOrders, getAllUsers, updateUserStatus, verifyUser, getAllProducts, deleteProduct, uploadProfilePhoto, updateProfile, getStoredUser, resolveImageUrl, adminListTestimonials, adminSetTestimonialStatus, adminDeleteTestimonial } from '../api/agromitra'
 import Sidebar from '../components/Sidebar'
 import SettingsTab from '../components/SettingsTab'
 import { useLanguage } from '../hooks/useLanguage'
@@ -49,6 +49,11 @@ export default function AdminPanel() {
   const [productSearch, setProductSearch]     = useState('')
   const [productStatusFilter, setProductStatusFilter] = useState('all')
 
+  // Testimonials
+  const [testimonials, setTestimonials]             = useState([])
+  const [testimonialsLoading, setTestimonialsLoading] = useState(false)
+  const [testimonialStatusFilter, setTestimonialStatusFilter] = useState('pending')
+
   // Profile
   const [user, setUser]                   = useState(getStoredUser())
   const [photoKey, setPhotoKey]           = useState(Date.now())
@@ -96,10 +101,20 @@ export default function AdminPanel() {
     finally { setProductsLoading(false) }
   }, [])
 
+  const fetchTestimonials = useCallback(async () => {
+    setTestimonialsLoading(true)
+    try {
+      const res = await adminListTestimonials(testimonialStatusFilter)
+      setTestimonials(res.data || [])
+    } catch { toast.error('Could not load testimonials') }
+    finally { setTestimonialsLoading(false) }
+  }, [testimonialStatusFilter])
+
   useEffect(() => { if (activeTab === 'users')    fetchUsers()   }, [activeTab, fetchUsers])
   useEffect(() => { if (activeTab === 'orders')  { fetchOrders(); fetchUsers() } }, [activeTab, fetchOrders, fetchUsers])
   useEffect(() => { if (activeTab === 'products') fetchProducts() }, [activeTab, fetchProducts])
   useEffect(() => { if (activeTab === 'overview') { fetchOrders(); fetchProducts() } }, [activeTab, fetchOrders, fetchProducts])
+  useEffect(() => { if (activeTab === 'testimonials') fetchTestimonials() }, [activeTab, fetchTestimonials])
 
   // ── User actions ─────────────────────────────────────────────
   const handleToggleStatus = async (user) => {
@@ -126,6 +141,23 @@ export default function AdminPanel() {
       toast.success(T('productDeleted'))
       fetchProducts()
     } catch (e) { toast.error(e?.response?.data?.detail || 'Could not delete product') }
+  }
+
+  const handleTestimonialStatus = async (t, isApproved) => {
+    try {
+      await adminSetTestimonialStatus(t.testimonial_id, isApproved)
+      toast.success(isApproved ? 'Testimonial approved' : 'Testimonial unapproved')
+      fetchTestimonials()
+    } catch (e) { toast.error(e?.response?.data?.detail || 'Could not update testimonial') }
+  }
+
+  const handleDeleteTestimonial = async (t) => {
+    if (!globalThis.confirm(`Delete this testimonial from ${t.name}? This cannot be undone.`)) return
+    try {
+      await adminDeleteTestimonial(t.testimonial_id)
+      toast.success('Testimonial deleted')
+      fetchTestimonials()
+    } catch (e) { toast.error(e?.response?.data?.detail || 'Could not delete testimonial') }
   }
 
   // ── Derived stats ────────────────────────────────────────────
@@ -174,6 +206,7 @@ export default function AdminPanel() {
             { key: 'users',     icon: '👥', label: T('users') },
             { key: 'orders',    icon: '📦', label: T('orders'),   badge: orders.length || null },
             { key: 'products',  icon: '🌿', label: T('products'), badge: products.length || null },
+            { key: 'testimonials', icon: '💬', label: T('testimonials') },
             { key: 'api',       icon: '🤖', label: T('aiStatus') },
             { key: 'profile',   icon: '👤', label: T('profile') },
             { key: 'settings',  icon: '⚙️', label: T('settings') },
@@ -569,6 +602,98 @@ export default function AdminPanel() {
           <div style={{ marginTop: 12, color: '#9E9E9E', fontSize: 13 }}>
             Showing {filteredProducts.length} of {products.length} products
           </div>
+        </div>
+      )}
+
+      {/* ════ Testimonials Tab ════ */}
+      {activeTab === 'testimonials' && (
+        <div className="card">
+          <div className="flex justify-between mb-20" style={{ flexWrap: 'wrap', gap: 12 }}>
+            <div className="section-title">{T('testimonialsMgmt')}</div>
+            <button className="btn btn-secondary btn-sm" onClick={fetchTestimonials}>🔄 Refresh</button>
+          </div>
+
+          {/* Status filter pills */}
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 16 }}>
+            {[
+              ['pending', T('pending')],
+              ['approved', T('approvedStatus')],
+              ['all', T('allTestimonials')],
+            ].map(([key, label]) => (
+              <button key={key}
+                onClick={() => setTestimonialStatusFilter(key)}
+                style={{
+                  padding: '4px 12px', borderRadius: 99, fontSize: 12, cursor: 'pointer', fontWeight: 500,
+                  background: testimonialStatusFilter === key ? '#2E7D32' : '#F5F5F5',
+                  color: testimonialStatusFilter === key ? '#fff' : '#546E7A',
+                  border: testimonialStatusFilter === key ? '1px solid #2E7D32' : '1px solid #E0E0E0',
+                }}>
+                {label}
+              </button>
+            ))}
+          </div>
+
+          {testimonialsLoading ? (
+            <div style={{ padding: '8px 0' }}>
+              {Array.from({ length: 3 }).map((_, i) => (
+                <div key={i} className="skeleton-row">
+                  <div className="skeleton skeleton-text" style={{ width: 130, flexShrink: 0 }} />
+                  <div className="skeleton skeleton-text" style={{ flex: 1 }} />
+                  <div className="skeleton skeleton-badge" />
+                </div>
+              ))}
+            </div>
+          ) : testimonials.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: 30, color: '#9E9E9E' }}>{T('noTestimonials')}</div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              {testimonials.map(t => (
+                <div key={t.testimonial_id} style={{
+                  border: '1px solid #EEE', borderRadius: 10, padding: 16,
+                  display: 'flex', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap',
+                }}>
+                  <div style={{ flex: 1, minWidth: 240, display: 'flex', gap: 12 }}>
+                    {t.profile_photo_url ? (
+                      <img
+                        src={resolveImageUrl(t.profile_photo_url)}
+                        alt={t.name}
+                        style={{ width: 36, height: 36, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+                      />
+                    ) : (
+                      <span style={{ fontSize: 28, flexShrink: 0 }}>🧑</span>
+                    )}
+                    <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                      <strong>{t.name}</strong>
+                      <span style={{ fontSize: 12, color: '#546E7A' }}>{t.role}{t.district ? `, ${t.district}` : ''}</span>
+                      <span className={`badge ${t.is_approved ? 'badge-green' : 'badge-gold'}`}>
+                        {t.is_approved ? T('approvedStatus') : T('pending')}
+                      </span>
+                    </div>
+                    <div style={{ fontSize: 14, marginBottom: 4 }}>{'⭐'.repeat(t.rating)}</div>
+                    <p style={{ fontSize: 14, color: '#546E7A', fontStyle: 'italic', margin: 0 }}>"{t.quote}"</p>
+                    <div style={{ fontSize: 11, color: '#9E9E9E', marginTop: 6 }}>{t.created_at?.slice(0, 10)}</div>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, minWidth: 130 }}>
+                    {!t.is_approved && (
+                      <button className="btn btn-sm btn-primary" onClick={() => handleTestimonialStatus(t, true)}>
+                        {T('approveBtn')}
+                      </button>
+                    )}
+                    {t.is_approved && (
+                      <button className="btn btn-sm btn-secondary" onClick={() => handleTestimonialStatus(t, false)}>
+                        {T('rejectBtn')}
+                      </button>
+                    )}
+                    <button className="btn btn-sm btn-danger" onClick={() => handleDeleteTestimonial(t)}>
+                      {T('deleteBtn')}
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

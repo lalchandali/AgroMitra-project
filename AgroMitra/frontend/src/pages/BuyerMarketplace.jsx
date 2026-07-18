@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { getAllProducts, getMyOrders, placeOrder, getStoredUser, getFairPrice, getPricePrediction, getDemandForecast, uploadProfilePhoto, resolveImageUrl, createReview, getProductReviews, getReviewableItems } from '../api/agromitra'
 import Sidebar from '../components/Sidebar'
@@ -29,6 +30,7 @@ const orderBadge = (status) => {
 export default function BuyerMarketplace() {
   const { lang } = useLanguage()
   const T = (key) => tr(key, lang)
+  const navigate = useNavigate()
   const [user, setUser] = useState(getStoredUser())
   const [photoKey, setPhotoKey] = useState(Date.now())
 
@@ -137,7 +139,7 @@ export default function BuyerMarketplace() {
   }, [])
 
   useEffect(() => { fetchProducts() }, [fetchProducts])
-  useEffect(() => { if (activeTab === 'orders') { fetchOrders(); fetchReviewableItems() } }, [activeTab, fetchOrders, fetchReviewableItems])
+  useEffect(() => { if (activeTab === 'orders' && user) { fetchOrders(); fetchReviewableItems() } }, [activeTab, user, fetchOrders, fetchReviewableItems])
 
   // Product Detail Modal খুললে সেই product-এর review গুলো লোড করো
   useEffect(() => {
@@ -285,6 +287,11 @@ export default function BuyerMarketplace() {
 
   // ── Place order ─────────────────────────────────────────────
   const handlePlaceOrder = async () => {
+    if (!user) {
+      toast.error(lang === 'bn' ? 'অর্ডার করতে আগে Login করুন।' : 'Please login to place an order.')
+      navigate('/auth')
+      return
+    }
     if (!deliveryAddress.trim()) {
       toast.error(T('enterAddress'))
       return
@@ -448,8 +455,19 @@ export default function BuyerMarketplace() {
                           {p.title_en} 
                           {p.title_bn && <span style={{ fontSize: 13, color: '#546E7A' }}> ({p.title_bn})</span>}
                         </div>
-                        <div className="product-location">
-                          📍 {p.district} • 👨‍🌾 {p.farmer_name || 'Farmer'}
+                        <div className="product-location" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                          <span>📍 {p.district} •</span>
+                          {p.farmer_photo_url ? (
+                            <img
+                              src={resolveImageUrl(p.farmer_photo_url)}
+                              alt={p.farmer_name || 'Farmer'}
+                              style={{ width: 18, height: 18, borderRadius: '50%', objectFit: 'cover' }}
+                              onError={(e) => { e.target.style.display = 'none' }}
+                            />
+                          ) : (
+                            <span>👨‍🌾</span>
+                          )}
+                          <span>{p.farmer_name || 'Farmer'}</span>
                         </div>
                         {p.average_rating != null && (
                           <div style={{ fontSize: 12, color: '#E65100', fontWeight: 600, marginTop: 2 }}>
@@ -705,7 +723,19 @@ export default function BuyerMarketplace() {
       )}
 
       {/* ════ Orders Tab ════ */}
-      {activeTab === 'orders' && (
+      {activeTab === 'orders' && !user && (
+        <div className="card" style={{ textAlign: 'center', padding: 40 }}>
+          <div style={{ fontSize: 48, marginBottom: 12 }}>🔒</div>
+          <div style={{ fontSize: 16, color: '#546E7A', marginBottom: 16 }}>
+            {lang === 'bn' ? 'অর্ডার দেখতে আগে Login করুন।' : 'Please login to view your orders.'}
+          </div>
+          <button className="btn btn-primary" onClick={() => navigate('/auth')}>
+            {lang === 'bn' ? '🔑 Login করুন' : '🔑 Login'}
+          </button>
+        </div>
+      )}
+
+      {activeTab === 'orders' && user && (
         <div>
           <div className="flex justify-between mb-20">
             <div className="section-title">📦 My Orders</div>
@@ -1055,7 +1085,20 @@ export default function BuyerMarketplace() {
                   </div>
                   <div className="product-body">
                     <div className="product-name">{p.title_en}</div>
-                    <div className="product-location">📍 {p.district} · 👨‍🌾 {p.farmer_name || 'Farmer'}</div>
+                    <div className="product-location" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                      <span>📍 {p.district} ·</span>
+                      {p.farmer_photo_url ? (
+                        <img
+                          src={resolveImageUrl(p.farmer_photo_url)}
+                          alt={p.farmer_name || 'Farmer'}
+                          style={{ width: 18, height: 18, borderRadius: '50%', objectFit: 'cover' }}
+                          onError={(e) => { e.target.style.display = 'none' }}
+                        />
+                      ) : (
+                        <span>👨‍🌾</span>
+                      )}
+                      <span>{p.farmer_name || 'Farmer'}</span>
+                    </div>
                     <div className="product-price" style={{ marginTop: 8 }}>৳{p.unit_price_bdt}<span>/kg</span></div>
                     <div style={{ fontSize: 13, color: '#546E7A' }}>{p.quantity_kg?.toLocaleString()} kg available</div>
                   </div>
@@ -1075,8 +1118,18 @@ export default function BuyerMarketplace() {
         </div>
       )}
       {/* ════ Profile Tab ════ */}
-      {/* ════ Profile Tab ════ */}
-      {activeTab === 'profile' && (
+      {activeTab === 'profile' && !user && (
+        <div className="card" style={{ textAlign: 'center', padding: 40, maxWidth: 600, margin: '0 auto' }}>
+          <div style={{ fontSize: 48, marginBottom: 12 }}>🔒</div>
+          <div style={{ fontSize: 16, color: '#546E7A', marginBottom: 16 }}>
+            {lang === 'bn' ? 'Profile দেখতে আগে Login করুন।' : 'Please login to view your profile.'}
+          </div>
+          <button className="btn btn-primary" onClick={() => navigate('/auth')}>
+            {lang === 'bn' ? '🔑 Login করুন' : '🔑 Login'}
+          </button>
+        </div>
+      )}
+      {activeTab === 'profile' && user && (
         <div style={{ maxWidth: 600, margin: '0 auto' }}>
 
           {/* Profile Header */}
@@ -1214,7 +1267,18 @@ export default function BuyerMarketplace() {
       )}
 
       {/* ════ Settings Tab ════ */}
-      {activeTab === 'settings' && (
+      {activeTab === 'settings' && !user && (
+        <div className="card" style={{ textAlign: 'center', padding: 40, maxWidth: 600, margin: '0 auto' }}>
+          <div style={{ fontSize: 48, marginBottom: 12 }}>🔒</div>
+          <div style={{ fontSize: 16, color: '#546E7A', marginBottom: 16 }}>
+            {lang === 'bn' ? 'Settings দেখতে আগে Login করুন।' : 'Please login to view settings.'}
+          </div>
+          <button className="btn btn-primary" onClick={() => navigate('/auth')}>
+            {lang === 'bn' ? '🔑 Login করুন' : '🔑 Login'}
+          </button>
+        </div>
+      )}
+      {activeTab === 'settings' && user && (
         <SettingsTab userRole="buyer" />
       )}
 
@@ -1285,10 +1349,31 @@ export default function BuyerMarketplace() {
                   </div>
                 </div>
 
+                <div style={{
+                  display: 'flex', alignItems: 'center', gap: 10,
+                  padding: '10px 12px', background: '#F9FBF9', borderRadius: 10, marginBottom: 14
+                }}>
+                  {p.farmer_photo_url ? (
+                    <img
+                      src={resolveImageUrl(p.farmer_photo_url)}
+                      alt={p.farmer_name || 'Farmer'}
+                      style={{ width: 40, height: 40, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
+                      onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'inline-flex' }}
+                    />
+                  ) : null}
+                  <span style={{
+                    fontSize: 20, width: 40, height: 40, borderRadius: '50%', background: '#E8F5E9',
+                    display: p.farmer_photo_url ? 'none' : 'inline-flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0
+                  }}>👨‍🌾</span>
+                  <div>
+                    <div style={{ fontSize: 11, color: '#546E7A' }}>{T('farmerLabel')}</div>
+                    <div style={{ fontSize: 14, fontWeight: 700, color: '#2E2E2E' }}>{p.farmer_name || 'Verified Farmer'}</div>
+                  </div>
+                </div>
+
                 <div style={{ display: 'grid', gap: 10, marginBottom: 20 }}>
                   {[
                     [ T('locationLabel'), `${p.district}${p.upazila ? `, ${p.upazila}` : ''}`],
-                    [ T('farmerLabel'), p.farmer_name || 'Verified Farmer'],
                     [ T('listedLabel'), p.created_at ? new Date(p.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '—'],
                     [ T('cropTypeLabel'), p.crop_name || p.title_en],
                     [ T('minOrderLabel'), p.min_order_kg ? `${p.min_order_kg} kg` : T('noMinimum')],
